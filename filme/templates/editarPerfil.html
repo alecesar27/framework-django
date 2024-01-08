@@ -1,0 +1,39 @@
+
+
+{% extends 'base.html' %} 
+{% load static %}
+{% load crispy_forms_tags %}
+{% block titulo %}
+ Edit Profile
+ {% endblock %}
+{% block content %}
+  
+
+<header class="min-h-screen bg-black bg-opacity-50 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'images/background_netflix.jpg' %}');">
+   <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+       <h2 class="text-2xl">{{user.email}}</h2>
+
+       <form method="post">
+         {% csrf_token %}
+           <fieldset class="form-group">
+               {{form | crispy }}
+
+               <legend class="border-bottom mb-4">Edit the fields below to edit your profile</legend>
+
+           </fieldset>
+           <button class="bg-red-600 py-1 px-3 text-white md:text-lg rounded-md" type="submit">Edit Profile</button>
+       </form>
+       <small><a href="{% url 'filme:mudarSenha'%}">Do you want to change your password?</a></small>
+   </div>
+</header>
+
+<footer class=" px-5 py-10 ">
+   <ul class="flex justify-between items-center">
+       
+       <li>&copy; 2023</li>
+       <li> Made in Python (Django)</li>
+       <li>By Alex</li>
+   </ul>
+</footer>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+<!-- largura 100% do tawilwind-->
+<nav class="w-full flex justifi-between items-center py-3 px-4 fixed z-50">
+  <!--O tailwind divide e 12 pedaços no caso metade para o 1 div e metade para o segundo div-->
+
+  <div class="w-6/12">
+    <a href="/">
+      {% load static %}
+      <img
+        class="w-2/12"
+        src="{% static 'images/AlexFlix.png' %}"
+        alt="Imagem quebrada"
+      />
+    </a>
+  </div>
+  
+  <div class="w-6/12 flex flex-nowrap justify-end">
+   
+    {% if user.is_authenticated %}
+    <div class="mr-2">
+        <form method="get" action="{% url 'filme:pesquisafilme'%}">
+        <input
+          type="text" name="query" value="{{request.GET.query}}"
+          class="py-1 px-2 rounded-md text-black"
+          placeholder="Search.."
+        />
+        <input type="submit" value=""  />
+      </form>
+    </div>
+      {% endif %}
+
+    <div class="mr-2">
+      {% if user.is_authenticated %}
+      <a href="{% url 'filme:logout'%}">
+        <button class="bg-red-600 text-whit py-1 px-3 rounded-md">Exit</button>
+      </a>
+       {%else%}
+      <a href="{% url 'filme:login'%}">
+        <button class="bg-red-600 text-whit py-1 px-3 rounded-md">Login</button>
+      </a>
+      {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="mr-2">
+      <a href="{% url 'filme:editarPerfil' user.pk %}">
+        <button class="bg-red-600 text-whit py-1 px-3 rounded-md">
+          Edit Profile
+        </button>
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</nav>
